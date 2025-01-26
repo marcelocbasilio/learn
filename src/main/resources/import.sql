@@ -13,6 +13,8 @@ INSERT INTO tb_user_role (user_id, role_id) VALUES (3, 1);
 INSERT INTO tb_user_role (user_id, role_id) VALUES (3, 2);
 INSERT INTO tb_user_role (user_id, role_id) VALUES (3, 3);
 
+INSERT INTO tb_notification (text, moment, read, route, user_id) VALUES ('Texto', TIMESTAMP WITH TIME ZONE '2025-01-25T20:00:00.12345Z', false, 'Rota', 1);
+
 INSERT INTO tb_course (name, img_uri, img_gray_uri) VALUES ('Bootcamp HTML', 'path_img.png', 'path_img_gray.png');
 
 INSERT INTO tb_offer (edition, start_moment, end_moment, course_id) VALUES ('1.0', TIMESTAMP WITH TIME ZONE '2025-01-25T20:00:00.12345Z', TIMESTAMP WITH TIME ZONE '2026-01-25T20:00:00.12345Z', 1);
