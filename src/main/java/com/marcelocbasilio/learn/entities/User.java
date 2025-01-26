@@ -23,7 +23,7 @@ public class User implements Serializable {
     private Set<Role> roles = new HashSet<Role>();
 
     @OneToMany(mappedBy = "user")
-    private List<Notification> notifications = new ArrayList<>();
+    private final List<Notification> notifications = new ArrayList<>();
 
     public User() {
     }
