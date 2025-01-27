@@ -4,7 +4,9 @@ import com.marcelocbasilio.learn.entities.pk.EnrollmentPk;
 import jakarta.persistence.*;
 
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -13,17 +15,16 @@ public class Enrollment {
 
     @EmbeddedId
     private final EnrollmentPk id = new EnrollmentPk();
-
+    @ManyToMany(mappedBy = "enrollmentsDone")
+    private final Set<Lesson> lessonsDone = new HashSet<>();
+    @OneToMany(mappedBy = "enrollment")
+    private final List<Deliver> deliveries = new ArrayList<>();
     @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
     private Instant enrollMoment;
-
     @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
     private Instant refundMoment;
     private boolean available;
     private boolean onlyUpdate;
-
-    @ManyToMany(mappedBy = "enrollmentsDone")
-    private Set<Lesson> lessonsDone = new HashSet<>();
 
     public Enrollment() {
     }
@@ -85,5 +86,37 @@ public class Enrollment {
         this.onlyUpdate = onlyUpdate;
     }
 
+    public Set<Lesson> getLessonsDone() {
+        return lessonsDone;
+    }
 
+    public List<Deliver> getDeliveries() {
+        return deliveries;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Enrollment that = (Enrollment) o;
+        return id.equals(that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return id.hashCode();
+    }
+
+    @Override
+    public String toString() {
+        return "Enrollment{" +
+               "id=" + id +
+               ", enrollMoment=" + enrollMoment +
+               ", refundMoment=" + refundMoment +
+               ", available=" + available +
+               ", onlyUpdate=" + onlyUpdate +
+               ", lessonsDone=" + lessonsDone +
+               ", deliveries=" + deliveries +
+               '}';
+    }
 }
